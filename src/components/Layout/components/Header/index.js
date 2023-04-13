@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import {
   faCircleQuestion,
   faCircleXmark,
-  faCloudUpload,
   faCoins,
   faEarthAsia,
   faEllipsisVertical,
@@ -15,7 +14,6 @@ import {
   faSpinner,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import Tippy from "@tippyjs/react";
 import HeadlessTippy from "@tippyjs/react/headless";
 import "tippy.js/dist/tippy.css";
 
@@ -25,6 +23,8 @@ import styles from "./Header.module.scss";
 import images from "~/assets/images";
 import AccountItem from "~/components/AccountItem";
 import Menu from "~/components/Popper/Menu";
+import { InboxIcon, MessageIcon, UploadIcon } from "~/components/Icons";
+import Image from "~/components/Image";
 
 const cx = classNames.bind(styles);
 
@@ -138,11 +138,19 @@ function Header() {
         <div className={cx("actions")}>
           {currentUser ? (
             <>
-              <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
-                <button className={cx("action-btn")}>
-                  <FontAwesomeIcon icon={faCloudUpload} />
-                </button>
-              </Tippy>
+              <button className={cx("action-btn")}>
+                <UploadIcon className={cx("icon")} />
+                <MessageIcon
+                  className={cx("icon")}
+                  width="2.6rem"
+                  height="2.6rem"
+                />
+                <InboxIcon
+                  className={cx("icon")}
+                  width="3.2rem"
+                  height="3.2rem"
+                />
+              </button>
             </>
           ) : (
             <>
@@ -155,10 +163,11 @@ function Header() {
             onChange={handleMenuChange}
           >
             {currentUser ? (
-              <img
+              <Image
                 src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/bb1ea5ff1998439b3db2ae44f253ddcc.jpeg?x-expires=1681444800&x-signature=LAE5V2sj2M3jRYYtFHmiINtRDsw%3D"
                 className={cx("user-avatar")}
                 alt="Nguyen Van A"
+                fallback="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png"
               />
             ) : (
               <button className={cx("more-btn")}>
